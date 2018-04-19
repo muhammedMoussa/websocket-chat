@@ -4,7 +4,7 @@ const socket = require('socket.io')
 //App Setup
 const app = express()
 const server = app.listen(4000, () => {
-    console.log('works!')
+    //console.log('works!')
 })
 
 //Static Files

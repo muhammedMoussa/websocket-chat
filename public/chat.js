@@ -13,14 +13,20 @@ btn.addEventListener('click', () => {
         message: message.value,
         handle: handle.value
     })
+    message.value = ""
 })
 
 message.addEventListener('keypress', () => {
-    socket.emit('typing', handle.value)
+    if(handle.value=="") {
+        alert('Please enter your name first!')
+    } else {
+        socket.emit('typing', handle.value);
+    }
 })
 
 //Listen for events
 socket.on('chat', (data) => {
+    feedback.innerHTML = " "
     output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>'
 })
 
