@@ -9,16 +9,20 @@ const message = document.getElementById('message'),
       feedback = document.getElementById('feedback')
 
 btn.addEventListener('click', () => {
-    socket.emit('chat', {
-        message: message.value,
-        handle: handle.value
-    })
-    message.value = ""
+    if(handle.value=="" || message.value=="") {
+        M.toast({html: 'Type your name and message!'})
+    } else {
+        socket.emit('chat', {
+            message: message.value,
+            handle: handle.value
+        })
+        message.value = ""
+    }
 })
 
 message.addEventListener('keypress', () => {
     if(handle.value=="") {
-        alert('Please enter your name first!')
+        M.toast({html: 'Please enter your name first!'})
     } else {
         socket.emit('typing', handle.value);
     }
